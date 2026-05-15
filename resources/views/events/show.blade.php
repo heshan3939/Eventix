@@ -37,6 +37,12 @@
             <div class="grid lg:grid-cols-12 gap-12">
                 <!-- Left Column: Content -->
                 <div class="lg:col-span-8 space-y-12">
+                    <!-- Banner Image -->
+                    <div class="relative aspect-[21/9] rounded-[2.5rem] overflow-hidden border border-white/5 shadow-2xl">
+                        <img src="{{ $event->banner_url }}" alt="{{ $event->title }}" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                    </div>
+
                     <!-- Title & Identity -->
                     <div>
                         <div class="inline-flex items-center space-x-2 {{ $event->status === 'published' ? 'bg-orange-500/10 border-orange-500/20 text-orange-400' : 'bg-blue-500/10 border-blue-500/20 text-blue-400' }} border px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest mb-6">
@@ -150,7 +156,7 @@
             const date = "{{ $event->starts_at->format('Y-m-d') }}";
             const city = "{{ $event->city }}";
 
-            if (!lat || !lon) {
+            if (lat === null || lon === null) {
                 document.getElementById('weather-loading').innerHTML = '<span class="text-[10px] text-white/20">Data unavailable</span>';
                 return;
             }

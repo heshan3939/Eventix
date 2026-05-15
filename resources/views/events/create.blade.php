@@ -39,6 +39,18 @@
                         </div>
 
                         <div>
+                            <x-label for="latitude" value="Latitude" />
+                            <x-input id="latitude" name="latitude" type="number" step="0.00000001" class="w-full" required value="{{ old('latitude') }}" placeholder="51.5074" />
+                            @error('latitude') <span class="text-rose-500 text-[10px] font-bold uppercase tracking-widest mt-2 block">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div>
+                            <x-label for="longitude" value="Longitude" />
+                            <x-input id="longitude" name="longitude" type="number" step="0.00000001" class="w-full" required value="{{ old('longitude') }}" placeholder="-0.1278" />
+                            @error('longitude') <span class="text-rose-500 text-[10px] font-bold uppercase tracking-widest mt-2 block">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div>
                             <x-label for="category" value="Nature of Experience" />
                             <select id="category" name="category" required 
                                     class="bg-white/5 border border-white/10 text-white focus:border-orange-500/50 focus:ring-4 focus:ring-orange-500/10 rounded-2xl shadow-sm py-3.5 px-4 transition-all duration-300 w-full appearance-none cursor-pointer">
@@ -64,6 +76,13 @@
                         <div>
                             <x-label for="ends_at" value="Conclusion (Optional)" />
                             <x-input id="ends_at" name="ends_at" type="datetime-local" class="w-full" value="{{ old('ends_at') }}" />
+                        </div>
+
+                        <div class="col-span-2">
+                            <button type="button" onclick="autoGeocode()" class="text-[10px] font-black uppercase tracking-[0.2em] text-orange-500 hover:text-orange-400 transition flex items-center gap-2 bg-orange-500/10 px-4 py-2 rounded-xl border border-orange-500/20">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                Auto-locate Venue
+                            </button>
                         </div>
 
                         <!-- Ticket Tiers Section -->
@@ -123,4 +142,39 @@
             </div>
         </div>
     </div>
+    <script>
+        async function autoGeocode() {
+            const venue = document.getElementById('venue').value;
+            const city = document.getElementById('city').value;
+            
+            if (!venue || !city) {
+                alert('Please enter both Venue and City first.');
+                return;
+            }
+
+            const btn = event.currentTarget;
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = 'Locating...';
+            btn.disabled = true;
+
+            try {
+                const query = `${venue}, ${city}`;
+                const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`);
+                const data = await response.json();
+                
+                if (data && data.length > 0) {
+                    document.getElementById('latitude').value = parseFloat(data[0].lat).toFixed(8);
+                    document.getElementById('longitude').value = parseFloat(data[0].lon).toFixed(8);
+                } else {
+                    alert('Could not find coordinates for this location. Please enter them manually.');
+                }
+            } catch (error) {
+                console.error('Geocoding error:', error);
+                alert('An error occurred while fetching coordinates.');
+            } finally {
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+            }
+        }
+    </script>
 </x-app-layout>

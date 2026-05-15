@@ -19,8 +19,6 @@
                     @if(!auth()->check() || auth()->user()->isCustomer())
                         <a href="{{ route('events.index') }}" class="hover:text-white transition">Explore</a>
                     @endif
-                    <a href="#" class="hover:text-white transition">Pricing</a>
-                    <a href="#" class="hover:text-white transition">Organisers</a>
                     @auth
                         <a href="{{ url('/dashboard') }}" class="bg-white/10 hover:bg-white/20 px-6 py-2 rounded-full border border-white/10 transition">Dashboard</a>
                     @else
@@ -114,23 +112,59 @@
         </div>
 
         <!-- Features Section -->
-        <div class="relative py-24 bg-black/50 border-t border-white/5">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid md:grid-cols-3 gap-12">
-                    <div class="p-8 rounded-3xl hover:bg-white/5 transition">
-                        <div class="w-14 h-14 bg-orange-500/10 border border-orange-500/20 rounded-2xl flex items-center justify-center text-2xl mb-6">🎟️</div>
-                        <h3 class="text-2xl font-bold mb-4">Smart Ticketing</h3>
-                        <p class="text-white/50 leading-relaxed">Identity-linked tickets that prevent scalping and ensure you always have a valid pass.</p>
+        <div class="relative py-32 overflow-hidden border-t border-white/5">
+            <!-- Background Decoration -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-orange-600/5 blur-[120px] rounded-full"></div>
+            </div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20">
+                    <h2 class="text-xs font-black uppercase tracking-[0.4em] text-orange-500 mb-4">Core Technology</h2>
+                    <h3 class="text-4xl md:text-5xl font-black tracking-tight">Built for the <span class="text-gradient">Next Generation</span></h3>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="group relative">
+                        <div class="absolute inset-0 bg-gradient-to-b from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[3rem]"></div>
+                        <div class="glass-dark p-10 rounded-[3rem] border border-white/5 hover:border-orange-500/30 transition-all duration-500 relative z-10 hover:-translate-y-2">
+                            <div class="w-16 h-16 bg-gradient-to-tr from-orange-500/20 to-orange-500/10 border border-orange-500/20 rounded-2xl flex items-center justify-center text-orange-500 mb-8 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 shadow-lg shadow-orange-500/10">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ticket"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4 group-hover:text-orange-400 transition-colors">Smart Ticketing</h3>
+                            <p class="text-white/50 leading-relaxed text-sm">
+                                Identity-linked tickets that prevent scalping and ensure you always have a valid pass. Securing your spot has never been more robust.
+                            </p>
+                        </div>
                     </div>
-                    <div class="p-8 rounded-3xl hover:bg-white/5 transition">
-                        <div class="w-14 h-14 bg-purple-500/10 border border-purple-500/20 rounded-2xl flex items-center justify-center text-2xl mb-6">📅</div>
-                        <h3 class="text-2xl font-bold mb-4">Event Insights</h3>
-                        <p class="text-white/50 leading-relaxed">Advanced analytics for organisers to track popularity and optimize booking flows.</p>
+
+                    <!-- Feature 2 -->
+                    <div class="group relative">
+                        <div class="absolute inset-0 bg-gradient-to-b from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[3rem]"></div>
+                        <div class="glass-dark p-10 rounded-[3rem] border border-white/5 hover:border-purple-500/30 transition-all duration-500 relative z-10 hover:-translate-y-2">
+                            <div class="w-16 h-16 bg-gradient-to-tr from-purple-500/20 to-purple-500/10 border border-purple-500/20 rounded-2xl flex items-center justify-center text-purple-400 mb-8 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 shadow-lg shadow-purple-500/10">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bar-chart-3"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4 group-hover:text-purple-400 transition-colors">Event Insights</h3>
+                            <p class="text-white/50 leading-relaxed text-sm">
+                                Advanced analytics for organisers to track popularity, monitor traffic, and optimize booking flows in real-time.
+                            </p>
+                        </div>
                     </div>
-                    <div class="p-8 rounded-3xl hover:bg-white/5 transition">
-                        <div class="w-14 h-14 bg-blue-500/10 border border-blue-500/20 rounded-2xl flex items-center justify-center text-2xl mb-6">🔒</div>
-                        <h3 class="text-2xl font-bold mb-4">Secure Checkout</h3>
-                        <p class="text-white/50 leading-relaxed">Military-grade encryption for every transaction. Your peace of mind is our priority.</p>
+
+                    <!-- Feature 3 -->
+                    <div class="group relative">
+                        <div class="absolute inset-0 bg-gradient-to-b from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[3rem]"></div>
+                        <div class="glass-dark p-10 rounded-[3rem] border border-white/5 hover:border-blue-500/30 transition-all duration-500 relative z-10 hover:-translate-y-2">
+                            <div class="w-16 h-16 bg-gradient-to-tr from-blue-500/20 to-blue-500/10 border border-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 mb-8 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 shadow-lg shadow-blue-500/10">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4 group-hover:text-blue-400 transition-colors">Secure Checkout</h3>
+                            <p class="text-white/50 leading-relaxed text-sm">
+                                Military-grade encryption for every transaction. We prioritize your privacy and data security above all else.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

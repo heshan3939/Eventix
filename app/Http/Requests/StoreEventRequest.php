@@ -18,6 +18,8 @@ class StoreEventRequest extends FormRequest
             'description'    => ['nullable', 'string'],
             'venue'          => ['required', 'string', 'max:255'],
             'city'           => ['required', 'string', 'max:100'],
+            'latitude'       => ['required', 'numeric', 'between:-90,90'],
+            'longitude'      => ['required', 'numeric', 'between:-180,180'],
             'category'       => ['required', 'in:music,conference,culture,sports,education'],
             'starts_at'      => ['required', 'date', 'after:now'],
             'ends_at'        => ['nullable', 'date', 'after:starts_at'],

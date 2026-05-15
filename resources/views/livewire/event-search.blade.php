@@ -35,6 +35,7 @@
             <div class="group relative bg-white/5 border border-white/10 rounded-[2.5rem] overflow-hidden hover:bg-white/[0.07] transition-all duration-500 hover:-translate-y-2">
                 <!-- Image Placeholder/Accent -->
                 <div class="aspect-[16/10] bg-slate-800 relative overflow-hidden">
+                    <img src="{{ $event->banner_url }}" alt="{{ $event->title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent z-10"></div>
                     <div class="absolute top-4 left-4 z-20">
                         <span class="bg-orange-500 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg shadow-orange-500/20">
