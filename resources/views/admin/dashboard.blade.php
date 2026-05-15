@@ -156,7 +156,9 @@
                                         </a>
                                     </td>
                                     <td class="px-8 py-6 text-center">
-                                        @if($event->status === 'published')
+                                        @if($event->is_expired)
+                                            <span class="bg-rose-500/10 text-rose-400 border border-rose-500/20 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest">Expired</span>
+                                        @elseif($event->status === 'published')
                                             <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest">Approved</span>
                                         @else
                                             <div class="flex flex-col items-center">

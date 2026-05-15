@@ -37,10 +37,15 @@
                 <div class="aspect-[16/10] bg-slate-800 relative overflow-hidden">
                     <img src="{{ $event->banner_url }}" alt="{{ $event->title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent z-10"></div>
-                    <div class="absolute top-4 left-4 z-20">
+                    <div class="absolute top-4 left-4 z-20 flex flex-wrap gap-2">
                         <span class="bg-orange-500 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg shadow-orange-500/20">
                             {{ $event->category }}
                         </span>
+                        @if($event->is_expired)
+                            <span class="bg-rose-600 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg shadow-rose-600/20">
+                                Expired
+                            </span>
+                        @endif
                     </div>
                     @if($event->is_sold_out)
                         <div class="absolute inset-0 flex items-center justify-center z-20 backdrop-blur-[2px] bg-black/40">

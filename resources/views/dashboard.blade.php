@@ -45,16 +45,21 @@
                                         </td>
                                         <td class="px-8 py-6">
                                             @php
+                                                $status = $event->status;
+                                                if ($event->is_expired) {
+                                                    $status = 'expired';
+                                                }
                                                 $statusClasses = [
                                                     'published' => 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
                                                     'pending' => 'bg-amber-500/10 text-amber-400 border-amber-500/20',
                                                     'rejected' => 'bg-rose-500/10 text-rose-400 border-rose-500/20',
+                                                    'expired' => 'bg-rose-500/10 text-rose-400 border-rose-500/20',
                                                 ];
-                                                $class = $statusClasses[$event->status] ?? 'bg-white/5 text-white/40 border-white/10';
+                                                $class = $statusClasses[$status] ?? 'bg-white/5 text-white/40 border-white/10';
                                             @endphp
                                             <div class="flex flex-col">
                                                 <span class="px-3 py-1 text-[10px] font-black uppercase tracking-widest rounded-lg border w-fit {{ $class }}">
-                                                    {{ $event->status }}
+                                                    {{ $status }}
                                                 </span>
                                                 @if($event->status == 'rejected' && $event->rejection_reason)
                                                     <span class="text-[9px] text-rose-400/60 mt-2 max-w-[150px] leading-tight font-medium italic">"{{ $event->rejection_reason }}"</span>

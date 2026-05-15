@@ -129,4 +129,11 @@ class Event extends Model
             },
         );
     }
+
+    protected function isExpired(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => ($this->ends_at ?? $this->starts_at)->isPast(),
+        );
+    }
 }

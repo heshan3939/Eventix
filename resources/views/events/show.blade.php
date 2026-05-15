@@ -45,9 +45,22 @@
 
                     <!-- Title & Identity -->
                     <div>
-                        <div class="inline-flex items-center space-x-2 {{ $event->status === 'published' ? 'bg-orange-500/10 border-orange-500/20 text-orange-400' : 'bg-blue-500/10 border-blue-500/20 text-blue-400' }} border px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest mb-6">
-                            <span class="w-1.5 h-1.5 {{ $event->status === 'published' ? 'bg-orange-500' : 'bg-blue-500' }} rounded-full {{ $event->status === 'published' ? 'animate-pulse' : '' }}"></span>
-                            <span>{{ $event->status === 'published' ? 'Live Experience' : 'Internal Preview' }}</span>
+                        @php
+                            $isExpired = $event->is_expired;
+                            $statusClass = $isExpired ? 'bg-rose-500/10 border-rose-500/20 text-rose-400' : ($event->status === 'published' ? 'bg-orange-500/10 border-orange-500/20 text-orange-400' : 'bg-blue-500/10 border-blue-500/20 text-blue-400');
+                            $dotClass = $isExpired ? 'bg-rose-500' : ($event->status === 'published' ? 'bg-orange-500' : 'bg-blue-500');
+                        @endphp
+                        <div class="inline-flex items-center space-x-2 {{ $statusClass }} border px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest mb-6">
+                            <span class="w-1.5 h-1.5 {{ $dotClass }} rounded-full {{ $event->status === 'published' && !$isExpired ? 'animate-pulse' : '' }}"></span>
+                            <span>
+                                @if($isExpired)
+                                    Expired Experience
+                                @elseif($event->status === 'published')
+                                    Live Experience
+                                @else
+                                    Internal Preview
+                                @endif
+                            </span>
                         </div>
                         <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-none mb-8">
                             {{ $event->title }}
