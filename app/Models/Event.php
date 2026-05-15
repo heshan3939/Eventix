@@ -16,6 +16,8 @@ class Event extends Model
         'banner_image', 'status', 'rejection_reason'
     ];
 
+    protected $appends = ['banner_url'];
+
     protected function casts(): array
     {
         return [
@@ -110,19 +112,20 @@ class Event extends Model
     {
         return Attribute::make(
             get: function () {
-                if ($this->banner_image) {
+                if (!empty($this->banner_image)) {
                     return asset('storage/' . $this->banner_image);
                 }
 
                 $defaults = [
-                    'music'      => 'https://images.unsplash.com/photo-1514525253361-bee8718a300a?q=80&w=1000&auto=format&fit=crop',
-                    'conference' => 'https://images.unsplash.com/photo-1540575861501-7ad05823c93f?q=80&w=1000&auto=format&fit=crop',
-                    'culture'    => 'https://images.unsplash.com/photo-1467307983825-619715426c70?q=80&w=1000&auto=format&fit=crop',
-                    'sports'     => 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?q=80&w=1000&auto=format&fit=crop',
-                    'education'  => 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1000&auto=format&fit=crop',
+                    'music'      => asset('images/categories/music.png'),
+                    'conference' => asset('images/categories/conference.png'),
+                    'culture'    => asset('images/categories/culture.png'),
+                    'sports'     => asset('images/categories/sports.png'),
+                    'education'  => asset('images/categories/education.png'),
                 ];
 
-                return $defaults[$this->category] ?? 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1000&auto=format&fit=crop';
+                $cat = strtolower($this->category);
+                return $defaults[$cat] ?? asset('images/categories/music.png');
             },
         );
     }
