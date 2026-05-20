@@ -65,3 +65,44 @@ Route::get('/test-email', function () {
 
     return 'Email sent!';
 });
+
+Route::get('/fix-storage', function () {
+    $link = public_path('storage');
+    
+    // Clear any existing folder or broken symlink
+    if (file_exists($link) || is_link($link)) {
+        try {
+            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                // On Windows, directory symlinks must be deleted via rmdir
+                if (is_dir($link)) {
+                    rmdir($link);
+                } else {
+                    unlink($link);
+                }
+            } else {
+                unlink($link);
+            }
+        } catch (\Exception $e) {
+            // Fallback: attempt rename if locked
+            try {
+                rename($link, $link . '_bak_' . time());
+            } catch (\Exception $ex) {}
+        }
+    }
+    
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
+    
+    return 'Storage link recreated successfully! Artisan output: <pre>' . \Illuminate\Support\Facades\Artisan::output() . '</pre>';
+});
+
+Route::get('/profile-photo/{path}', function ($path) {
+    $fullPath = 'profile-photos/' . $path;
+    if (!\Illuminate\Support\Facades\Storage::disk('public')->exists($fullPath)) {
+        abort(404);
+    }
+    
+    $file = \Illuminate\Support\Facades\Storage::disk('public')->get($fullPath);
+    $mimeType = \Illuminate\Support\Facades\Storage::disk('public')->mimeType($fullPath);
+    
+    return response($file, 200)->header('Content-Type', $mimeType);
+})->name('profile-photo.show');

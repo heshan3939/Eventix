@@ -80,6 +80,15 @@ class User extends Authenticatable
         return $this->role === 'customer';
     }
 
+    public function getProfilePhotoUrlAttribute()
+    {
+        if ($this->profile_photo_path) {
+            return route('profile-photo.show', ['path' => basename($this->profile_photo_path)]);
+        }
+
+        return $this->defaultProfilePhotoUrl();
+    }
+
     /**
      * Get the attributes that should be cast.
      *
