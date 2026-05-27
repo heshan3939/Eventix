@@ -22,7 +22,10 @@ Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
-    // Customer bookings
+    // Stripe Checkout routes
+    Route::post('/payment/checkout', [\App\Http\Controllers\StripePaymentController::class, 'checkout'])->name('payment.checkout');
+    Route::get('/payment/success', [\App\Http\Controllers\StripePaymentController::class, 'success'])->name('payment.success');
+    Route::get('/payment/cancel', [\App\Http\Controllers\StripePaymentController::class, 'cancel'])->name('payment.cancel');
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
     Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
     Route::get('/bookings/checkout', [BookingController::class, 'checkout'])->name('bookings.checkout');

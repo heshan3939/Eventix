@@ -14,7 +14,7 @@
             @endif
         </div>
         <div class="text-right">
-            <span class="text-2xl font-black tracking-tighter">£{{ number_format($type->price, 0) }}</span>
+            <span class="text-2xl font-black tracking-tighter">Rs. {{ number_format($type->price, 0) }}</span>
             <span class="block text-[10px] font-black text-white/20 uppercase tracking-widest">per pass</span>
         </div>
     </div>
@@ -34,7 +34,7 @@
                         </div>
                         <div class="bg-orange-500/10 rounded-2xl p-3 border border-orange-500/20">
                             <label class="block text-[10px] font-black text-orange-400/60 uppercase tracking-widest mb-1">Total</label>
-                            <span class="text-lg font-black text-orange-400">£{{ number_format($subtotal, 0) }}</span>
+                            <span class="text-lg font-black text-orange-400">Rs. {{ number_format($subtotal, 0) }}</span>
                         </div>
                     </div>
 
@@ -58,7 +58,7 @@
                     </div>
                     <div class="bg-orange-500/10 rounded-2xl p-3 border border-orange-500/20">
                         <label class="block text-[10px] font-black text-orange-400/60 uppercase tracking-widest mb-1">Total</label>
-                        <span class="text-lg font-black text-orange-400">£{{ number_format($type->price, 0) }}</span>
+                        <span class="text-lg font-black text-orange-400">Rs. {{ number_format($type->price, 0) }}</span>
                     </div>
                 </div>
                 

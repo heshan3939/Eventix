@@ -30,7 +30,7 @@
                                 <div id="ticket-row-{{ $ticket->id }}" class="flex flex-col md:flex-row md:items-center gap-6 p-6 rounded-3xl bg-white/[0.02] border border-white/5 group hover:bg-white/[0.04] transition-all">
                                     <div class="flex-grow">
                                         <div class="text-white font-bold text-lg">{{ $ticket->name }}</div>
-                                        <div class="text-orange-500 font-black text-sm mt-1">£{{ number_format($ticket->price, 2) }}</div>
+                                        <div class="text-orange-500 font-black text-sm mt-1">Rs. {{ number_format($ticket->price, 2) }}</div>
                                         
                                         @php
                                             $booked = $ticket->bookings()->where('status', 'confirmed')->sum('quantity');
@@ -80,8 +80,8 @@ m>
                             </div>
 
                             <div>
-                                <x-label for="new_price" value="Price (£)" />
-                                <x-input id="new_price" type="number" step="0.01" min="0" class="w-full" placeholder="99.00" />
+                                <x-label for="new_price" value="Price (Rs.)" />
+                                <x-input id="new_price" type="number" step="0.01" min="0" class="w-full" placeholder="1500.00" />
                             </div>
 
                             <div>
@@ -125,20 +125,15 @@ m>
 
             btn.disabled = true;
             try {
-                const response = await fetch(API_BASE, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                const res = await response.json();
-                
-                if (res.success) {
+                const response = await axios.post(API_BASE, data);
+                if (response.data.success) {
                     location.reload(); // Refresh to show new tier
                 } else {
-                    alert('Error: ' + (res.message || 'Check your inputs'));
+                    alert('Error: ' + (response.data.message || 'Check your inputs'));
                 }
             } catch (e) {
                 console.error(e);
+                alert('Error: ' + (e.response?.data?.message || 'Check your inputs'));
             } finally {
                 btn.disabled = false;
             }
@@ -149,14 +144,8 @@ m>
             const newQty = document.getElementById(`input-${id}`).value;
             
             try {
-                const response = await fetch(`${API_BASE}/${id}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify({ quantity: newQty })
-                });
-                const res = await response.json();
-                
-                if (res.success) {
+                const response = await axios.put(`${API_BASE}/${id}`, { quantity: newQty });
+                if (response.data.success) {
                     // Update UI stats
                     const booked = parseInt(document.getElementById(`booked-${id}`).innerText);
                     const percentage = (booked / newQty) * 100;
@@ -164,10 +153,11 @@ m>
                     document.getElementById(`progress-${id}`).style.width = `${percentage}%`;
                     alert('Capacity updated via API!');
                 } else {
-                    alert(res.message);
+                    alert(response.data.message);
                 }
             } catch (e) {
                 console.error(e);
+                alert('Error: ' + (e.response?.data?.message || 'Check your inputs'));
             }
         }
 
@@ -176,19 +166,15 @@ m>
             if (!confirm('Are you sure you want to delete this ticket tier?')) return;
 
             try {
-                const response = await fetch(`${API_BASE}/${id}`, {
-                    method: 'DELETE',
-                    headers: { 'Accept': 'application/json' }
-                });
-                const res = await response.json();
-                
-                if (res.success) {
+                const response = await axios.delete(`${API_BASE}/${id}`);
+                if (response.data.success) {
                     document.getElementById(`ticket-row-${id}`).remove();
                 } else {
-                    alert(res.message);
+                    alert(response.data.message);
                 }
             } catch (e) {
                 console.error(e);
+                alert('Error: ' + (e.response?.data?.message || 'Failed to delete ticket tier'));
             }
         }
     </script>

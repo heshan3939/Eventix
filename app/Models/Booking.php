@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     protected $fillable = [
-        'user_id', 'ticket_type_id', 'quantity', 'total_price', 'reference', 'status', 'cancelled_at'
+        'user_id', 'ticket_type_id', 'quantity', 'total_price', 'reference', 'status', 'cancelled_at',
+        'stripe_session_id', 'payment_status'
     ];
 
     protected function casts(): array
@@ -26,6 +27,18 @@ class Booking extends Model
     public function ticketType()
     {
         return $this->belongsTo(TicketType::class);
+    }
+
+    // Convenient accessor to the Event via TicketType
+    public function event()
+    {
+        return $this->ticketType->event;
+    }
+
+    // Helper to check payment status
+    public function isPaid()
+    {
+        return $this->payment_status === 'paid';
     }
 
     public function transaction()

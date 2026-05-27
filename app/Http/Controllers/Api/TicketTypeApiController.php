@@ -71,6 +71,13 @@ class TicketTypeApiController extends Controller
      */
     public function destroy(TicketType $ticketType)
     {
+        if ($ticketType->bookings()->exists()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Cannot delete this ticket tier because it has existing bookings. Please adjust the capacity instead.'
+            ], 400);
+        }
+
         $ticketType->delete();
         return $this->successResponse(null, 'Ticket type deleted successfully.');
     }
