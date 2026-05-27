@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Mail\OrderReceipt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Stripe\Checkout\Session as StripeSession;
 use Stripe\Stripe;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -89,12 +91,27 @@ class StripePaymentController extends Controller
         $session    = StripeSession::retrieve($sessionId);
         $bookingIds = array_filter(explode(',', $session->metadata->booking_ids ?? ''));
 
-        $bookings = Booking::whereIn('id', $bookingIds)->get();
+        $bookings = Booking::with(['ticketType.event', 'user'])->whereIn('id', $bookingIds)->get();
+        $shouldSendReceipt = false;
+
         foreach ($bookings as $booking) {
             if ($booking->payment_status !== 'paid') {
                 $booking->payment_status = 'paid';
                 $booking->status         = 'confirmed';
                 $booking->save();
+                $shouldSendReceipt = true;
+            }
+        }
+
+        // Send email receipt to user if we confirmed new paid bookings
+        if ($shouldSendReceipt && $bookings->isNotEmpty()) {
+            $user = $bookings->first()->user;
+            if ($user && $user->email) {
+                try {
+                    Mail::to($user->email)->send(new OrderReceipt($bookings));
+                } catch (\Exception $e) {
+                    Log::error('Failed to send order receipt email for bookings: ' . implode(',', $bookingIds) . '. Error: ' . $e->getMessage());
+                }
             }
         }
 

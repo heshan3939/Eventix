@@ -12,6 +12,11 @@ class EventPolicy
         return $user->isAdmin() ? true : null;
     }
 
+    public function view(User $user, Event $event): bool
+    {
+        return $event->organiser_id === $user->id;
+    }
+
     public function update(User $user, Event $event): bool
     {
         return $event->organiser_id === $user->id;
