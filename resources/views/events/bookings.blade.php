@@ -21,7 +21,7 @@
                 </div>
                 <div class="glass-dark border border-white/5 p-8 rounded-[2rem]">
                     <p class="text-[10px] font-black text-white/30 uppercase tracking-[0.2em] mb-2">Net Revenue</p>
-                    <p class="text-4xl font-black tracking-tighter text-orange-400">£{{ number_format($event->bookings->sum('total_price'), 0) }}</p>
+                    <p class="text-4xl font-black tracking-tighter text-orange-400">Rs. {{ number_format($event->bookings->sum('total_price'), 0) }}</p>
                 </div>
                 <div class="glass-dark border border-white/5 p-8 rounded-[2rem]">
                     <p class="text-[10px] font-black text-white/30 uppercase tracking-[0.2em] mb-2">Event Capacity</p>
@@ -55,7 +55,7 @@
                                         </span>
                                     </td>
                                     <td class="px-8 py-6 text-white font-bold">{{ $booking->quantity }}</td>
-                                    <td class="px-8 py-6 text-orange-400 font-black text-lg tracking-tighter">£{{ number_format($booking->total_price, 0) }}</td>
+                                    <td class="px-8 py-6 text-orange-400 font-black text-lg tracking-tighter">Rs. {{ number_format($booking->total_price, 0) }}</td>
                                     <td class="px-8 py-6">
                                         @php
                                             $statusClasses = [

@@ -16,7 +16,7 @@
                             <span>/</span>
                             <span class="text-white">Events</span>
                         </nav>
-                        <h1 class="text-5xl md:text-7xl font-black tracking-tighter">
+                        <h1 class="text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter">
                             Upcoming <span class="text-gradient">Events</span>
                         </h1>
                     </div>

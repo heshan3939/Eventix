@@ -29,21 +29,21 @@
                         <table class="min-w-full divide-y divide-white/5">
                             <thead class="bg-white/5">
                                 <tr>
-                                    <th class="px-8 py-5 text-left text-[10px] font-black text-white/30 uppercase tracking-[0.3em]">Experience</th>
-                                    <th class="px-8 py-5 text-left text-[10px] font-black text-white/30 uppercase tracking-[0.3em]">Status</th>
-                                    <th class="px-8 py-5 text-left text-[10px] font-black text-white/30 uppercase tracking-[0.3em]">Bookings</th>
-                                    <th class="px-8 py-5 text-left text-[10px] font-black text-white/30 uppercase tracking-[0.3em]">Revenue</th>
-                                    <th class="px-8 py-5"></th>
+                                    <th class="px-4 md:px-8 py-4 md:py-5 text-left text-[10px] font-black text-white/30 uppercase tracking-[0.3em]">Experience</th>
+                                    <th class="px-4 md:px-8 py-4 md:py-5 text-left text-[10px] font-black text-white/30 uppercase tracking-[0.3em]">Status</th>
+                                    <th class="px-4 md:px-8 py-4 md:py-5 text-left text-[10px] font-black text-white/30 uppercase tracking-[0.3em]">Bookings</th>
+                                    <th class="px-4 md:px-8 py-4 md:py-5 text-left text-[10px] font-black text-white/30 uppercase tracking-[0.3em]">Revenue</th>
+                                    <th class="px-4 md:px-8 py-4 md:py-5"></th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-white/5">
                                 @forelse($events as $event)
                                     <tr class="group hover:bg-white/[0.02] transition-colors">
-                                        <td class="px-8 py-6">
+                                        <td class="px-4 md:px-8 py-4 md:py-6">
                                             <div class="font-bold text-white group-hover:text-orange-400 transition-colors">{{ $event->title }}</div>
                                             <div class="text-xs text-white/30 font-medium mt-1">{{ $event->starts_at->format('d M Y, g:ia') }}</div>
                                         </td>
-                                        <td class="px-8 py-6">
+                                        <td class="px-4 md:px-8 py-4 md:py-6">
                                             @php
                                                 $status = $event->status;
                                                 if ($event->is_expired) {
@@ -66,14 +66,14 @@
                                                 @endif
                                             </div>
                                         </td>
-                                        <td class="px-8 py-6">
+                                        <td class="px-4 md:px-8 py-4 md:py-6">
                                             <div class="text-white font-black text-lg tracking-tighter">{{ $event->bookings_count }}</div>
                                             <a href="{{ route('events.bookings', $event) }}" class="text-[10px] text-white/30 font-black uppercase tracking-widest hover:text-orange-500 transition-colors">Audit Passes →</a>
                                         </td>
-                                        <td class="px-8 py-6 text-orange-400 font-black text-lg tracking-tighter">
-                                            £{{ number_format($event->total_revenue, 0) }}
+                                        <td class="px-4 md:px-8 py-4 md:py-6 text-orange-400 font-black text-lg tracking-tighter">
+                                            Rs. {{ number_format($event->total_revenue, 0) }}
                                         </td>
-                                        <td class="px-8 py-6 text-right">
+                                        <td class="px-4 md:px-8 py-4 md:py-6 text-right">
                                             <div class="flex gap-4 justify-end items-center">
                                                 <a href="{{ route('events.show', $event) }}" class="text-white/40 hover:text-white transition font-bold text-xs uppercase tracking-widest">View</a>
                                                 <a href="{{ route('events.edit', $event) }}" class="text-white/40 hover:text-orange-500 transition font-bold text-xs uppercase tracking-widest">Edit</a>
@@ -83,7 +83,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="px-8 py-20 text-center">
+                                        <td colspan="5" class="px-4 md:px-8 py-12 md:py-20 text-center">
                                             <div class="text-4xl mb-4 grayscale opacity-30">🎭</div>
                                             <p class="text-white/30 font-bold uppercase tracking-widest text-sm">No experiences hosted yet.</p>
                                         </td>

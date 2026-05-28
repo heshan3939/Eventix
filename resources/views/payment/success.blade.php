@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                             <div class="text-right flex-shrink-0">
-                                <p class="text-white font-black text-lg">£{{ number_format($booking->total_price, 2) }}</p>
+                                <p class="text-white font-black text-lg">Rs. {{ number_format($booking->total_price, 2) }}</p>
                                 <span class="inline-block mt-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-black uppercase tracking-widest">Confirmed</span>
                             </div>
                         </div>

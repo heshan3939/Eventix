@@ -7,7 +7,7 @@
                    class="w-full bg-white/5 border-none rounded-2xl pl-12 pr-4 py-4 text-white placeholder:text-white/30 focus:ring-2 focus:ring-orange-500/50 transition">
         </div>
         
-        <div class="grid grid-cols-2 md:grid-cols-2 gap-4 w-full md:w-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full md:w-auto">
             <select wire:model.live="category" 
                     class="bg-white/5 border-none rounded-2xl px-6 py-4 text-white focus:ring-2 focus:ring-orange-500/50 transition cursor-pointer appearance-none">
                 <option value="" class="bg-slate-900">All Categories</option>

@@ -204,7 +204,7 @@
                                     </td>
                                     <td style="text-align: center;">{{ $booking->quantity }}</td>
                                     <td style="text-align: right; font-weight: 600;">
-                                        £{{ number_format($booking->total_price, 2) }}
+                                        Rs. {{ number_format($booking->total_price, 2) }}
                                     </td>
                                 </tr>
                             @endforeach
@@ -212,7 +212,7 @@
                             <!-- Total Row -->
                             <tr class="total-row">
                                 <td colspan="2" class="total-label">Total Paid</td>
-                                <td class="total-value">£{{ number_format($totalAmount, 2) }}</td>
+                                <td class="total-value">Rs. {{ number_format($totalAmount, 2) }}</td>
                             </tr>
                         </tbody>
                     </table>

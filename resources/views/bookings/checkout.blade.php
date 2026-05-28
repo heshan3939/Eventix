@@ -28,7 +28,7 @@
                                         </div>
                                     </div>
                                     <div class="text-right">
-                                        <p class="text-white font-black text-lg">£{{ number_format($booking->total_price, 2) }}</p>
+                                        <p class="text-white font-black text-lg">Rs. {{ number_format($booking->total_price, 2) }}</p>
                                         <p class="text-white/20 text-[10px] font-bold uppercase tracking-tighter">Incl. Platform Fee</p>
                                     </div>
                                 </div>
@@ -38,7 +38,7 @@
                             <div class="flex justify-between items-end">
                                 <div>
                                     <p class="text-white/30 text-[10px] font-black uppercase tracking-[0.3em] mb-1">Total Amount Due</p>
-                                    <p class="text-5xl font-black tracking-tighter text-white">£{{ number_format($totalAmount, 2) }}</p>
+                                    <p class="text-5xl font-black tracking-tighter text-white">Rs. {{ number_format($totalAmount, 2) }}</p>
                                 </div>
                                 <div class="text-right">
                                     <p class="text-white/20 text-xs font-medium">Standard Processing</p>
@@ -63,7 +63,7 @@
                             @endforeach
                             <div class="pt-6">
                                 <x-button class="w-full justify-center py-5 text-lg group overflow-hidden relative">
-                                    <span class="relative z-10">Proceed to Stripe Checkout (£{{ number_format($totalAmount, 2) }})</span>
+                                    <span class="relative z-10">Proceed to Stripe Checkout (Rs. {{ number_format($totalAmount, 2) }})</span>
                                     <div class="absolute inset-0 bg-gradient-to-r from-orange-600 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 </x-button>
                             </div>

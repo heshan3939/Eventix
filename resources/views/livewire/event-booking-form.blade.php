@@ -22,7 +22,7 @@
                 <div class="flex justify-between items-center mb-4">
                     <div>
                         <h4 class="font-bold text-white">{{ $type->name }}</h4>
-                        <p class="text-orange-500 font-black text-sm">£{{ number_format($type->price, 2) }}</p>
+                        <p class="text-orange-500 font-black text-sm">Rs. {{ number_format($type->price, 2) }}</p>
                     </div>
                     @if($available > 0)
                         <div class="flex items-center bg-black/40 rounded-xl p-1 border border-white/10">
@@ -37,7 +37,7 @@
                 <div class="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
                     <span class="text-white/20">{{ $available }} Remaining</span>
                     @if($selectedTickets[$type->id] > 0)
-                        <span class="text-orange-500">£{{ number_format($type->price * $selectedTickets[$type->id], 2) }}</span>
+                        <span class="text-orange-500">Rs. {{ number_format($type->price * $selectedTickets[$type->id], 2) }}</span>
                     @endif
                 </div>
             </div>
@@ -48,7 +48,7 @@
         <div class="flex justify-between items-end mb-6">
             <div>
                 <p class="text-[10px] font-black uppercase tracking-widest text-white/30">Total Investment</p>
-                <p class="text-3xl font-black text-white tracking-tighter">£{{ number_format($this->subtotal, 2) }}</p>
+                <p class="text-3xl font-black text-white tracking-tighter">Rs. {{ number_format($this->subtotal, 2) }}</p>
             </div>
             <p class="text-xs font-bold text-white/40">{{ $this->count }} Passes Selected</p>
         </div>

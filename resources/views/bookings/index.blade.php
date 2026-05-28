@@ -59,7 +59,7 @@
                                         🎟️ {{ $booking->ticketType->name }} &times; {{ $booking->quantity }}
                                     </span>
                                     <span class="text-xl font-black text-white tracking-tighter">
-                                        £{{ number_format($booking->total_price, 0) }}
+                                        Rs. {{ number_format($booking->total_price, 0) }}
                                     </span>
                                 </div>
                             </div>
