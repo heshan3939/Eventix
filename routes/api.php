@@ -31,7 +31,9 @@ Route::middleware(['auth:sanctum', 'throttle:api'])->group(function () {
     
     // Auth Management
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/user', fn($req) => new UserResource($req->user()));
+    Route::get('/user', function () {
+    return new UserResource(auth()->user());
+});
     
     // Events API
     Route::prefix('events')->group(function () {
